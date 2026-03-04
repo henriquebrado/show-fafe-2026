@@ -19,6 +19,7 @@
             margin: 0; padding: 0;
             overflow-x: hidden;
             font-size: 13px;
+            background-color: #f8fafc;
         }
 
         .fixed-background {
@@ -43,9 +44,10 @@
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
         .slot-button {
@@ -54,6 +56,7 @@
             color: #1e3a8a;
             font-weight: 700;
             font-size: 0.7rem;
+            transition: all 0.2s;
         }
 
         select, input, textarea { 
@@ -66,7 +69,7 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        h1 { font-size: clamp(2rem, 6vw, 3.5rem); }
+        h1 { font-size: clamp(2.2rem, 6vw, 4rem); }
         
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #db2777; border-radius: 10px; }
@@ -79,11 +82,11 @@
 
     <!-- Navegação Compacta -->
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-pink-500 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 py-1.5 flex flex-col lg:flex-row justify-between items-center gap-1">
+        <div class="max-w-6xl mx-auto px-4 py-1.5 flex flex-col lg:flex-row justify-between items-center gap-2">
             <div class="cursor-pointer transition-transform hover:scale-105 flex flex-col items-center lg:items-start" onclick="showTab('inicio')">
                 <span class="text-[6px] font-black text-blue-900 tracking-widest uppercase leading-none opacity-60">Campeonato Nacional</span>
-                <span class="text-md font-black text-pink-600 italic uppercase leading-none">Show e Precisão</span>
-                <span class="text-sm font-bold text-cyan-600 uppercase leading-none">Fafe 2026</span>
+                <span class="text-lg font-black text-pink-600 italic uppercase leading-none">Show e Precisão</span>
+                <span class="text-md font-bold text-cyan-600 uppercase leading-none">Fafe 2026</span>
             </div>
             <div class="flex flex-wrap justify-center gap-1">
                 <button id="btn-inicio" onclick="showTab('inicio')" class="nav-link px-2.5 py-1 rounded-full font-bold text-[8.5px] uppercase hover:bg-slate-100 transition">Início</button>
@@ -92,14 +95,14 @@
                 <button id="btn-balnearios" onclick="showTab('balnearios')" class="nav-link px-2.5 py-1 rounded-full font-bold text-[8.5px] uppercase hover:bg-slate-100 transition">Logística</button>
                 
                 <a id="link-programa" href="#" target="_blank" class="hidden px-2.5 py-1 rounded-full font-bold text-[8.5px] uppercase bg-blue-600 text-white flex items-center gap-1 shadow-sm">
-                    <i data-lucide="calendar" class="w-2.5 h-2.5"></i> Programa
+                    <i data-lucide="calendar" class="w-3 h-3"></i> Programa
                 </a>
                 <a id="link-resultados" href="#" target="_blank" class="hidden px-2.5 py-1 rounded-full font-bold text-[8.5px] uppercase bg-cyan-500 text-white flex items-center gap-1 shadow-sm">
-                    <i data-lucide="award" class="w-2.5 h-2.5"></i> Resultados
+                    <i data-lucide="award" class="w-3 h-3"></i> Resultados
                 </a>
 
                 <button id="btn-admin" onclick="checkAdmin()" class="nav-link px-2.5 py-1 rounded-full font-bold text-[8.5px] uppercase bg-slate-800 text-white ml-2 flex items-center gap-1">
-                    <i data-lucide="lock" class="w-2.5 h-2.5"></i> Admin
+                    <i data-lucide="lock" class="w-3 h-3"></i> Admin
                 </button>
             </div>
         </div>
@@ -108,23 +111,23 @@
     <main class="max-w-5xl mx-auto px-4 py-4 min-h-screen">
         
         <!-- SECÇÃO INÍCIO -->
-        <section id="tab-inicio" class="tab-content space-y-6">
+        <section id="tab-inicio" class="tab-content space-y-8">
             
-            <div class="py-6 md:py-10">
-                <h1 class="font-black text-blue-950 uppercase italic leading-none tracking-tighter">Fafe 2026</h1>
+            <div class="py-10 md:py-14">
+                <h1 class="font-black text-blue-950 uppercase italic leading-none tracking-tighter drop-shadow-sm">Fafe 2026</h1>
                 <p class="text-pink-600 font-bold text-xs md:text-sm uppercase tracking-[0.2em] mt-1 italic">Sala de Visitas do Minho</p>
             </div>
 
             <!-- Mensagens -->
             <div class="grid md:grid-cols-2 gap-4">
-                <div class="glass-card p-5 rounded-xl border-l-2 border-cyan-400 text-left">
+                <div class="glass-card p-6 rounded-2xl border-l-4 border-cyan-400 text-left">
                     <h3 class="text-sm font-black text-blue-900 uppercase italic mb-1">Câmara de Fafe</h3>
                     <p class="text-slate-600 text-[11px] leading-snug italic">
-                        "É com orgulho que Fafe recebe este Campeonato Nacional. Uma prova de prestígio que traz o melhor da patinagem."
+                        "É com orgulho que Fafe recebe este Campeonato Nacional. Uma prova de prestígio que traz o melhor da patinagem nacional."
                         <span class="font-bold text-slate-800 not-italic block mt-1 text-[9px]">— Antero Barbosa, Presidente</span>
                     </p>
                 </div>
-                <div class="glass-card p-5 rounded-xl border-l-2 border-pink-500 text-left">
+                <div class="glass-card p-6 rounded-2xl border-l-4 border-pink-500 text-left">
                     <h3 class="text-sm font-black text-blue-900 uppercase italic mb-1">Organização GNA</h3>
                     <p class="text-slate-600 text-[11px] leading-snug italic">
                         "Preparamos o Pavilhão para acolher todos com a máxima cortesia no coração do Minho."
@@ -134,18 +137,18 @@
             </div>
 
             <!-- Localização -->
-            <div class="glass-card p-5 rounded-2xl flex flex-col md:flex-row gap-5 items-center max-w-4xl mx-auto">
-                <div class="flex-1 space-y-2 text-left">
-                    <h3 class="text-lg font-black text-blue-900 uppercase italic">Localização</h3>
+            <div class="glass-card p-6 rounded-3xl flex flex-col md:flex-row gap-6 items-center max-w-4xl mx-auto">
+                <div class="flex-1 space-y-3 text-left">
+                    <h3 class="text-xl font-black text-blue-900 uppercase italic leading-none">Onde Estamos</h3>
                     <div class="flex items-center gap-2 bg-white/50 p-2 rounded-lg border border-white/20">
                         <i data-lucide="map-pin" class="text-blue-900 w-3 h-3"></i>
-                        <span class="text-[11px] font-semibold text-slate-700">Travessa Parque da Cidade, 4820-139 Fafe</span>
+                        <span class="text-[11px] font-semibold text-slate-700 uppercase tracking-tighter leading-none">Travessa Parque da Cidade, 4820-139 Fafe</span>
                     </div>
-                    <a href="https://maps.app.goo.gl/JCkSoKMQnRC69C1q6" target="_blank" class="inline-flex items-center bg-blue-900 text-white font-bold px-4 py-1.5 rounded-full uppercase text-[8px] tracking-widest hover:bg-pink-600 transition">
-                        <i data-lucide="map" class="mr-1 w-3 h-3"></i> Ver no Google Maps
+                    <a href="https://maps.app.goo.gl/JCkSoKMQnRC69C1q6" target="_blank" class="inline-flex items-center bg-blue-900 text-white font-bold px-4 py-1.5 rounded-full uppercase text-[8px] tracking-widest hover:bg-pink-600 transition shadow-sm">
+                        <i data-lucide="map" class="mr-1 w-3 h-3"></i> Abrir no GPS
                     </a>
                 </div>
-                <div class="w-full md:w-1/2 rounded-xl overflow-hidden border border-white/50 shadow-sm max-w-[350px]">
+                <div class="w-full md:w-1/2 rounded-xl overflow-hidden border border-white shadow-sm max-w-[350px]">
                     <img src="morada.png" class="w-full h-auto" alt="Mapa">
                 </div>
             </div>
@@ -162,40 +165,40 @@
                 </div>
             </div>
 
-            <!-- FAQ (Apoio ao Participante) -->
+            <!-- FAQ (Muito Discreto) -->
             <div class="glass-card p-4 rounded-2xl border border-cyan-100 shadow-sm mt-6 text-left max-w-2xl mx-auto">
                 <h3 class="text-[10px] font-black text-blue-900 uppercase italic mb-3 flex items-center gap-1.5 opacity-70">
-                    <i data-lucide="help-circle" class="text-cyan-500 w-3 h-3"></i> Perguntas Frequentes
+                    <i data-lucide="help-circle" class="text-cyan-500 w-3 h-3"></i> Apoio Informativo (FAQ)
                 </h3>
                 <div class="grid lg:grid-cols-2 gap-4">
                     <div class="space-y-1" id="faq-list-public"></div>
                     <div id="chat-response" class="bg-blue-900/5 p-3 rounded-xl min-h-[60px] flex items-center justify-center text-center">
-                        <p class="text-slate-400 italic text-[9px]">Clique numa questão para a resposta.</p>
+                        <p class="text-slate-400 italic text-[9px]">Clique numa questão para ver a resposta oficial.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- SECÇÃO TREINOS -->
-        <section id="tab-treinos" class="tab-content hidden space-y-4">
-            <div class="text-center glass-card p-4 rounded-xl border border-white shadow-sm">
-                <h2 class="text-xl font-black uppercase italic text-blue-900">Agenda de Treinos</h2>
-                <p class="text-pink-600 font-bold uppercase text-[8px] tracking-widest mt-1 opacity-70">Reservas até 22:00 (Fim: 23:00)</p>
+        <section id="tab-treinos" class="tab-content hidden space-y-4 text-center">
+            <div class="glass-card p-5 rounded-xl border border-white">
+                <h2 class="text-xl font-black uppercase text-blue-900 italic leading-none mb-1">Agenda de Treinos</h2>
+                <p class="text-pink-600 font-bold uppercase text-[8px] tracking-widest opacity-70">Slots disponíveis até às 22:00 (Fim às 23:00)</p>
             </div>
             <div id="grid-treinos" class="space-y-4"></div>
         </section>
 
         <!-- SECÇÃO EMENTAS -->
         <section id="tab-ementas" class="tab-content hidden space-y-6 text-center">
-            <div class="glass-card p-4 rounded-xl mb-4 border border-white">
-                <h2 class="text-xl font-black uppercase italic text-blue-900">Refeições de Equipa</h2>
+            <div class="glass-card p-4 rounded-xl border border-white mb-4">
+                <h2 class="text-xl font-black uppercase italic text-blue-900 leading-tight">Ementas e Refeições</h2>
             </div>
             <div class="grid md:grid-cols-3 gap-4" id="public-menu-container"></div>
             
-            <div class="bg-slate-950 text-white p-6 rounded-2xl shadow-xl max-w-md mx-auto mt-6 text-left">
+            <div class="bg-slate-950 text-white p-6 rounded-2xl shadow-xl max-w-md mx-auto mt-6 text-left border-2 border-slate-800">
                 <h3 class="text-lg font-black mb-3 uppercase text-cyan-400 text-center">Pedido de Refeição</h3>
                 <form id="form-refeicao" class="space-y-3">
-                    <input type="text" name="clube" placeholder="EQUIPA" class="w-full text-[10px] font-bold" required>
+                    <input type="text" name="clube" placeholder="CLUBE / EQUIPA" class="w-full text-[10px] font-bold uppercase" required>
                     <div class="grid grid-cols-2 gap-2">
                         <select id="select-dia-refeicao" name="diaRefeicao" onchange="updateFormLabels()" class="w-full text-[10px]"></select>
                         <select id="select-tipo-refeicao" name="tipoRefeicao" onchange="updateFormLabels()" class="w-full text-[10px]">
@@ -204,15 +207,15 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 pt-2 border-t border-white/10 text-center">
                         <div>
-                            <label id="label-prato-a" class="text-[7px] font-black uppercase text-pink-400 block mb-0.5">Prato A</label>
+                            <label id="label-prato-a" class="text-[7px] font-black uppercase text-pink-400 block mb-1">Prato A</label>
                             <input type="number" name="qtdPratoA" value="0" min="0" class="w-full text-center text-lg font-black bg-white/5">
                         </div>
                         <div>
-                            <label id="label-prato-b" class="text-[7px] font-black uppercase text-cyan-400 block mb-0.5">Prato B</label>
+                            <label id="label-prato-b" class="text-[7px] font-black uppercase text-cyan-400 block mb-1">Prato B</label>
                             <input type="number" name="qtdPratoB" value="0" min="0" class="w-full text-center text-lg font-black bg-white/5">
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-pink-600 py-2 rounded-lg font-black uppercase text-[9px] tracking-widest shadow-lg hover:bg-pink-500">Enviar Pedido</button>
+                    <button type="submit" class="w-full bg-pink-600 py-2 rounded-lg font-black uppercase text-[9px] tracking-widest shadow-lg hover:bg-pink-500 transition-all">Submeter Pedido</button>
                 </form>
             </div>
         </section>
@@ -220,14 +223,14 @@
         <!-- SECÇÃO LOGÍSTICA -->
         <section id="tab-balnearios" class="tab-content hidden space-y-6">
             <div class="glass-card rounded-2xl shadow-lg overflow-hidden border border-white max-w-3xl mx-auto text-left">
-                <div class="p-5 border-b border-slate-100 bg-white/50">
+                <div class="p-4 border-b border-slate-100 bg-white/50">
                     <h3 class="font-black text-blue-900 uppercase italic text-md leading-none">Distribuição de Balneários</h3>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-xs">
                         <thead>
                             <tr class="text-[8px] font-black uppercase text-slate-400 border-b bg-white/50">
-                                <th class="p-4">Clube</th><th class="p-4">Sala</th><th class="p-4 text-cyan-600">Entrada</th><th class="p-4 text-pink-600">Saída</th>
+                                <th class="p-3">Clube</th><th class="p-3">Sala</th><th class="p-3 text-cyan-600">Entrada</th><th class="p-3 text-pink-600">Saída</th>
                             </tr>
                         </thead>
                         <tbody id="lista-balnearios" class="divide-y divide-white/50"></tbody>
@@ -239,93 +242,109 @@
         <!-- SECÇÃO ADMIN -->
         <section id="tab-admin" class="tab-content hidden space-y-4">
             <div class="flex flex-col md:flex-row justify-between items-center glass-card p-4 rounded-xl border border-white gap-2">
-                <h2 class="text-md font-black uppercase italic text-blue-900">Painel Administrativo</h2>
+                <h2 class="text-md font-black uppercase italic text-blue-900 leading-none">Gestão Central</h2>
                 <div class="flex gap-2">
-                    <button onclick="exportarExcel('treinos')" class="bg-green-600 text-white px-3 py-1 rounded text-[8px] font-black">EXCEL PISTA</button>
-                    <button onclick="logoutAdmin()" class="bg-slate-200 text-slate-700 px-3 py-1 rounded text-[8px] font-black">SAIR</button>
+                    <button onclick="exportarExcel('refeicoes')" class="bg-blue-600 text-white px-3 py-1 rounded text-[8px] font-black uppercase shadow-sm">Excel Comida</button>
+                    <button onclick="exportarExcel('treinos')" class="bg-green-600 text-white px-3 py-1 rounded text-[8px] font-black uppercase shadow-sm">Excel Pista</button>
+                    <button onclick="logoutAdmin()" class="bg-slate-200 text-slate-700 px-3 py-1 rounded text-[8px] font-black uppercase">Sair</button>
                 </div>
             </div>
 
             <!-- GESTÃO DE LINKS E FAQS -->
             <div class="grid lg:grid-cols-2 gap-4">
                 <div class="bg-slate-900 text-white p-4 rounded-xl shadow text-left">
-                    <h3 class="font-black uppercase text-cyan-400 text-[9px] border-b border-white/10 pb-1 mb-2">Links Ativos</h3>
+                    <h3 class="font-black uppercase text-cyan-400 text-[9px] border-b border-white/10 pb-1 mb-3">Links Públicos</h3>
                     <div class="space-y-3">
-                        <div class="flex gap-1 flex-col">
+                        <div>
                             <input id="admin-url-programa" type="text" placeholder="URL Programa" class="w-full text-[9px]">
-                            <div class="flex gap-1">
-                                <button onclick="updateLink('programa', true)" class="flex-1 bg-blue-600 py-1 rounded text-[8px] font-black uppercase">ATIVAR</button>
-                                <button onclick="updateLink('programa', false)" class="flex-1 bg-slate-700 py-1 rounded text-[8px] font-black uppercase">ESCONDER</button>
+                            <div class="flex gap-1 mt-1">
+                                <button onclick="updateLink('programa', true)" class="flex-1 bg-blue-600 py-1 rounded text-[8px] font-black">ATIVAR</button>
+                                <button onclick="updateLink('programa', false)" class="flex-1 bg-slate-700 py-1 rounded text-[8px] font-black">ESCONDER</button>
                             </div>
                         </div>
-                        <div class="flex gap-1 flex-col">
+                        <div>
                             <input id="admin-url-resultados" type="text" placeholder="URL Resultados" class="w-full text-[9px]">
-                            <div class="flex gap-1">
-                                <button onclick="updateLink('resultados', true)" class="flex-1 bg-cyan-600 py-1 rounded text-[8px] font-black uppercase">ATIVAR</button>
-                                <button onclick="updateLink('resultados', false)" class="flex-1 bg-slate-700 py-1 rounded text-[8px] font-black uppercase">ESCONDER</button>
+                            <div class="flex gap-1 mt-1">
+                                <button onclick="updateLink('resultados', true)" class="flex-1 bg-cyan-600 py-1 rounded text-[8px] font-black">ATIVAR</button>
+                                <button onclick="updateLink('resultados', false)" class="flex-1 bg-slate-700 py-1 rounded text-[8px] font-black">ESCONDER</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-blue-950 text-white p-4 rounded-xl shadow text-left text-[9px]">
-                    <h3 class="font-black uppercase text-cyan-400 border-b border-white/10 pb-1 mb-2">Gestão FAQ</h3>
+                    <h3 class="font-black uppercase text-cyan-400 border-b border-white/10 pb-1 mb-3">Gestão Chatbot (FAQ)</h3>
                     <form id="admin-form-faq" class="space-y-1.5">
                         <input name="faqPerg" placeholder="Pergunta" class="w-full">
                         <textarea name="faqResp" placeholder="Resposta" class="w-full h-10"></textarea>
-                        <button type="submit" class="w-full bg-cyan-600 py-1 rounded font-black">GRAVAR FAQ</button>
+                        <button type="submit" class="w-full bg-cyan-600 py-1.5 rounded font-black">GRAVAR FAQ</button>
                     </form>
-                    <div class="mt-2 space-y-1 max-h-[60px] overflow-y-auto" id="admin-faq-list"></div>
+                    <div class="mt-2 space-y-1 max-h-[80px] overflow-y-auto custom-scrollbar" id="admin-faq-list"></div>
                 </div>
             </div>
 
+            <!-- GESTÃO OPERACIONAL DE LISTAS -->
             <div class="grid lg:grid-cols-2 gap-4">
                 <div class="bg-slate-900 text-white p-4 rounded-xl shadow text-left">
-                    <h3 class="font-black uppercase text-cyan-400 text-[9px] border-b border-white/10 pb-1 mb-2">Horários Marcados (Gestão)</h3>
+                    <h3 class="font-black uppercase text-cyan-400 text-[9px] border-b border-white/10 pb-1 mb-3">Pedidos Cozinha (Ativos)</h3>
+                    <div class="space-y-1 max-h-[180px] overflow-y-auto custom-scrollbar" id="admin-refeicoes-lista"></div>
+                </div>
+                <div class="bg-slate-900 text-white p-4 rounded-xl shadow text-left">
+                    <h3 class="font-black uppercase text-cyan-400 text-[9px] border-b border-white/10 pb-1 mb-3">Horários Marcados (Gestão de Nomes)</h3>
                     <div class="space-y-1 max-h-[180px] overflow-y-auto custom-scrollbar" id="admin-treinos-lista"></div>
                 </div>
-                <div class="space-y-2">
-                    <div class="bg-slate-900 p-4 rounded-xl shadow text-left">
-                        <h3 class="font-black text-cyan-400 text-[9px] mb-1.5 uppercase">Bloqueio em Massa</h3>
-                        <form id="admin-form-treino" class="space-y-1.5 text-[9px]">
-                            <select id="admin-select-dia-bloqueio" name="dataManual" class="w-full"></select>
-                            <div class="grid grid-cols-2 gap-1 text-center">
-                                <select id="admin-select-hora-inicio" name="horaInicio"></select>
-                                <select id="admin-select-hora-fim" name="horaFim"></select>
-                            </div>
-                            <input name="clubeManual" placeholder="Motivo / Equipa" class="w-full">
-                            <button type="submit" class="w-full bg-blue-600 py-1.5 rounded font-black">BLOQUEAR</button>
-                        </form>
-                    </div>
-                    <div class="bg-slate-900 p-4 rounded-xl shadow text-left">
-                        <h3 class="font-black text-cyan-400 text-[9px] mb-1.5 uppercase">Gestão Balneários</h3>
-                        <form id="admin-form-balneario" class="space-y-1.5 text-[9px]">
-                            <input name="clubeBal" placeholder="Clube" class="w-full" required>
-                            <input name="salaBal" placeholder="Sala" class="w-full" required>
-                            <div class="grid grid-cols-2 gap-1">
-                                <input name="entradaBal" placeholder="Entrada" class="bg-slate-800 p-1" required>
-                                <input name="saidaBal" placeholder="Saída" class="bg-slate-800 p-1" required>
-                            </div>
-                            <button type="submit" class="w-full bg-pink-600 py-1.5 rounded font-black">PUBLICAR</button>
-                        </form>
-                    </div>
+            </div>
+
+            <!-- FORMULÁRIOS DE BLOQUEIO -->
+            <div class="grid md:grid-cols-3 gap-4 text-white text-left">
+                <div class="bg-slate-900 p-4 rounded-xl shadow">
+                    <h3 class="font-black text-cyan-400 text-[9px] mb-2 uppercase border-b border-white/10 pb-1">Bloqueio em Massa</h3>
+                    <form id="admin-form-treino" class="space-y-1.5 text-[9px]">
+                        <select id="admin-select-dia-bloqueio" name="dataManual" class="w-full"></select>
+                        <div class="grid grid-cols-2 gap-1 text-center">
+                            <select id="admin-select-hora-inicio" name="horaInicio"></select>
+                            <select id="admin-select-hora-fim" name="horaFim"></select>
+                        </div>
+                        <input name="clubeManual" placeholder="Equipa / Motivo" class="w-full">
+                        <button type="submit" class="w-full bg-blue-600 py-1.5 rounded font-black uppercase">Bloquear</button>
+                    </form>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-xl shadow">
+                    <h3 class="font-black text-cyan-400 text-[9px] mb-2 uppercase border-b border-white/10 pb-1">Definir Menu</h3>
+                    <form id="admin-form-menu" class="space-y-1.5 text-[9px]">
+                        <select name="diaMenu" class="w-full"></select>
+                        <input name="pratoAMenu" placeholder="Menu do Dia" class="w-full" required>
+                        <button type="submit" class="w-full bg-pink-600 py-1.5 rounded font-black uppercase tracking-tighter">Gravar Menu</button>
+                    </form>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-xl shadow">
+                    <h3 class="font-black text-cyan-400 text-[9px] mb-2 uppercase border-b border-white/10 pb-1">Publicar Balneário</h3>
+                    <form id="admin-form-balneario" class="space-y-1.5 text-[9px]">
+                        <input name="clubeBal" placeholder="Clube" class="w-full" required>
+                        <input name="salaBal" placeholder="Sala" class="w-full" required>
+                        <div class="grid grid-cols-2 gap-1">
+                            <input name="entradaBal" placeholder="Entrada" class="bg-slate-800 p-1" required>
+                            <input name="saidaBal" placeholder="Saída" class="bg-slate-800 p-1" required>
+                        </div>
+                        <button type="submit" class="w-full bg-pink-600 py-1.5 rounded font-black uppercase">Publicar</button>
+                    </form>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Rodapé Compacto -->
-    <footer class="bg-slate-950 text-white py-8 px-4 text-center border-t-2 border-pink-600 relative overflow-hidden">
+    <!-- Rodapé Minimalista Corrigido -->
+    <footer class="bg-slate-950 text-white py-10 px-4 text-center border-t-2 border-pink-600 relative">
         <div class="max-w-xl mx-auto mb-6 opacity-90">
-            <img src="footer.png" class="w-full h-auto grayscale-0 max-w-[400px] mx-auto" alt="Parceiros" onerror="this.onerror=null; this.src='footer.jpg';">
+            <img src="footer.png" class="w-full h-auto grayscale-0 max-w-[380px] mx-auto" alt="Parceiros" onerror="this.onerror=null; this.src='footer.jpg';">
         </div>
-        <div class="max-w-4xl mx-auto space-y-4">
-            <p class="text-[7px] font-black uppercase tracking-[0.3em] opacity-30">© 2026 Campeonato Nacional Show e Precisão</p>
+        <div class="max-w-4xl mx-auto space-y-5">
+            <p class="text-[7px] font-black uppercase tracking-[0.4em] opacity-30 leading-none">© 2026 Campeonato Nacional Show e Precisão</p>
             
-            <div class="inline-block bg-white/5 px-6 py-4 rounded-xl border border-cyan-400/10 shadow-sm">
-                <span class="text-[7px] font-black text-cyan-400 block mb-0.5 tracking-widest opacity-80 uppercase">Contacto GNA</span>
-                <a href="mailto:depcom.patinagem.gna@gmail.com" class="text-white font-bold text-xs md:text-sm hover:text-cyan-400 transition-colors">
+            <div class="inline-block bg-white/5 px-8 py-5 rounded-2xl border-2 border-cyan-400/20 shadow-lg group transition-all hover:bg-white/10">
+                <span class="text-[7px] font-black uppercase text-cyan-400 block mb-1 tracking-widest opacity-80 uppercase leading-none">Apoio Organizacional GNA</span>
+                <a href="mailto:depcom.patinagem.gna@gmail.com" class="text-white font-black text-xl hover:text-cyan-400 transition-colors tracking-tighter">
                     depcom.patinagem.gna@gmail.com
                 </a>
             </div>
@@ -336,7 +355,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, doc, setDoc, onSnapshot, addDoc, deleteDoc, query, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, doc, setDoc, onSnapshot, addDoc, deleteDoc, query, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -352,112 +371,138 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
+        const appId = 'showfafe2026';
 
-        let treinos = []; let faqs = []; let menus = {};
+        let treinos = []; let faqs = []; let refeicoes = []; let menus = {};
         let adminLoggedIn = false;
-        // Slot das 22h termina às 23h
         const slots = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
 
         window.onload = async () => {
-            lucide.createIcons(); 
-            showTab('inicio'); 
+            lucide.createIcons(); showTab('inicio'); 
             await signInAnonymously(auth); 
             initListeners();
-            setupFormHandlers(); // Inicialização segura dos submetedores de formulário
+            setupFormHandlers(); 
         };
 
         function initListeners() {
-            onSnapshot(collection(db, "treinos"), (s) => { 
+            if(!auth.currentUser) return;
+            const rootPath = ['artifacts', appId, 'public', 'data'];
+            
+            onSnapshot(collection(db, ...rootPath, "treinos"), (s) => { 
                 treinos = s.docs.map(d => ({id: d.id, ...d.data()})); 
-                renderCalendar(); 
-                updateAdminTreinoList(); 
+                renderCalendar(); updateAdminTreinoList(); 
             });
-            onSnapshot(collection(db, "menus"), (s) => { s.docs.forEach(d => menus[d.id] = d.data()); renderPublicMenus(); updateFormLabels(); });
-            onSnapshot(collection(db, "faqs"), (s) => { faqs = s.docs.map(d => ({id: d.id, ...d.data()})); renderFAQs(); });
-            onSnapshot(doc(db, "settings", "links"), (d) => {
+            onSnapshot(collection(db, ...rootPath, "refeicoes"), (s) => { 
+                refeicoes = s.docs.map(d => ({id: d.id, ...d.data()})); 
+                updateAdminCozinhaList();
+            });
+            onSnapshot(collection(db, ...rootPath, "menus"), (s) => { 
+                s.docs.forEach(d => menus[d.id] = d.data()); 
+                renderPublicMenus(); 
+                updateFormLabels(); 
+            });
+            onSnapshot(collection(db, ...rootPath, "faqs"), (s) => { 
+                faqs = s.docs.map(d => ({id: d.id, ...d.data()})); 
+                renderFAQs(); 
+            });
+            onSnapshot(doc(db, 'artifacts', appId, 'public', 'settings', 'links'), (d) => {
                 const data = d.exists() ? d.data() : {};
                 const lProg = document.getElementById('link-programa');
                 const lRes = document.getElementById('link-resultados');
                 if(data.programa_vis) { lProg.classList.remove('hidden'); lProg.href = data.programa_url; } else lProg.classList.add('hidden');
                 if(data.resultados_vis) { lRes.classList.remove('hidden'); lRes.href = data.resultados_url; } else lRes.classList.add('hidden');
             });
+            onSnapshot(collection(db, ...rootPath, "balnearios"), (s) => { 
+                const list = document.getElementById('lista-balnearios');
+                if(list) list.innerHTML = s.docs.map(d => {
+                    const b = d.data();
+                    return `<tr><td class="p-3 uppercase font-bold text-slate-700">${b.clube}</td><td class="p-3 font-black text-blue-900">${b.sala}</td><td class="p-3 text-cyan-600 font-bold">${b.entrada || '--'}</td><td class="p-3 text-pink-600 font-bold">${b.saida || '--'}</td></tr>`;
+                }).join('') || '<tr><td colspan="4" class="p-8 text-center opacity-30 italic text-[10px]">Aguardando dados...</td></tr>';
+            });
         }
 
-        // Função central para gerir submissões e evitar erros de "null"
         function setupFormHandlers() {
+            const rootPath = ['artifacts', appId, 'public', 'data'];
             const forms = {
                 'form-refeicao': async (fd) => {
-                    await addDoc(collection(db, "refeicoes"), { clube: fd.get('clube'), dia: fd.get('diaRefeicao'), refeicao: fd.get('tipoRefeicao'), qtdA: fd.get('qtdPratoA'), qtdB: fd.get('qtdPratoB'), timestamp: Date.now() });
+                    await addDoc(collection(db, ...rootPath, "refeicoes"), { clube: fd.get('clube'), dia: fd.get('diaRefeicao'), refeicao: fd.get('tipoRefeicao'), qtdA: fd.get('qtdPratoA'), qtdB: fd.get('qtdPratoB'), timestamp: Date.now() });
                     alert("Reserva enviada!");
                 },
                 'admin-form-menu': async (fd) => {
-                    const k = `${fd.get('diaMenu')}-Almoço`;
-                    await setDoc(doc(db, "menus", k), { pratoA: fd.get('pratoAMenu'), timestamp: Date.now() });
-                    alert("Menu atualizado!");
+                    const dia = fd.get('diaMenu');
+                    await setDoc(doc(db, ...rootPath, "menus", `${dia}-Menu`), { pratoA: fd.get('pratoAMenu'), timestamp: Date.now() });
+                    alert("Ementa atualizada!");
                 },
                 'admin-form-treino': async (fd) => {
                     const d = fd.get('dataManual'); const hI = fd.get('horaInicio'); const hF = fd.get('horaFim'); const c = fd.get('clubeManual');
                     const idxI = slots.indexOf(hI); let idxF = hF === "23:00" ? slots.length : slots.indexOf(hF);
                     if(idxI >= idxF) { alert("Início deve ser anterior ao fim."); return; }
-                    for(let i = idxI; i < idxF; i++) { await setDoc(doc(db, "treinos", `${d}-${slots[i]}`.replace(/\W/g, '-')), { dia: d, hora: slots[i], clube: c, timestamp: Date.now() }); }
-                    alert("Pista bloqueada!");
+                    for(let i = idxI; i < idxF; i++) { await setDoc(doc(db, ...rootPath, "treinos", `${d}-${slots[i]}`.replace(/\W/g, '-')), { dia: d, hora: slots[i], clube: c, timestamp: Date.now() }); }
+                    alert("Bloqueio efetuado!");
                 },
                 'admin-form-faq': async (fd) => {
-                    await addDoc(collection(db, "faqs"), { pergunta: fd.get('faqPerg'), resposta: fd.get('faqResp'), timestamp: Date.now() });
+                    await addDoc(collection(db, ...rootPath, "faqs"), { pergunta: fd.get('faqPerg'), resposta: fd.get('faqResp'), timestamp: Date.now() });
                 },
                 'admin-form-balneario': async (fd) => {
-                    await addDoc(collection(db, "balnearios"), { clube: fd.get('clubeBal'), sala: fd.get('salaBal'), entrada: fd.get('entradaBal'), saida: fd.get('saidaBal'), timestamp: Date.now() });
+                    await addDoc(collection(db, ...rootPath, "balnearios"), { clube: fd.get('clubeBal'), sala: fd.get('salaBal'), entrada: fd.get('entradaBal'), saida: fd.get('saidaBal'), timestamp: Date.now() });
                     alert("Publicado!");
                 }
             };
-
             Object.keys(forms).forEach(id => {
                 const el = document.getElementById(id);
-                if(el) {
-                    el.onsubmit = async (e) => {
-                        e.preventDefault();
-                        await forms[id](new FormData(e.target));
-                        e.target.reset();
-                    };
-                }
+                if(el) el.onsubmit = async (e) => { e.preventDefault(); await forms[id](new FormData(e.target)); e.target.reset(); };
             });
         }
 
         window.updateLink = async (tipo, vis) => {
             const url = document.getElementById(`admin-url-${tipo}`).value;
-            await setDoc(doc(db, "settings", "links"), { [`${tipo}_url`]: url, [`${tipo}_vis`]: vis }, { merge: true });
-            alert("Estado atualizado!");
+            await setDoc(doc(db, 'artifacts', appId, 'public', 'settings', 'links'), { [`${tipo}_url`]: url, [`${tipo}_vis`]: vis }, { merge: true });
+            alert("Links atualizados!");
         };
 
-        window.chatAnswer = (id) => {
-            const faq = faqs.find(f => f.id === id);
-            const respEl = document.getElementById('chat-response');
-            if(faq && respEl) {
-                respEl.innerHTML = `<div class="text-left animate-in fade-in slide-in-from-bottom-1"><p class="font-black text-blue-900 uppercase text-[8px] mb-1 border-b border-blue-50 pb-0.5 tracking-tighter italic">Assistente Organizador:</p><p class="text-[10px] font-bold text-slate-700 leading-snug italic">${faq.resposta}</p></div>`;
-                respEl.classList.remove('flex', 'items-center', 'justify-center', 'text-center');
-            }
+        window.editReservationName = async (id) => {
+            const novoNome = prompt("Novo nome para a reserva:");
+            if(!novoNome) return;
+            await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'treinos', id), { clube: novoNome });
+            alert("Nome alterado!");
         };
 
         function renderFAQs() {
             const pubList = document.getElementById('faq-list-public');
             const admList = document.getElementById('admin-faq-list');
-            if(pubList) pubList.innerHTML = faqs.map(f => `<button onclick="chatAnswer('${f.id}')" class="w-full text-left p-2.5 bg-white/60 hover:bg-cyan-50 rounded-lg border border-slate-100 transition font-bold text-[9px] flex justify-between items-center group mb-1 shadow-sm">${f.pergunta} <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition w-3 h-3"></i></button>`).join('') || "Sem informações de momento.";
-            if(admList) admList.innerHTML = faqs.map(f => `<div class="flex justify-between items-center bg-white/10 p-1.5 rounded text-[8px] uppercase group"><span>${f.pergunta}</span><button onclick="window.deleteItem('faqs', '${f.id}')" class="text-red-400 font-black opacity-40 group-hover:opacity-100">REMOVER</button></div>`).join('');
+            if(pubList) pubList.innerHTML = faqs.map(f => `<button onclick="chatAnswer('${f.id}')" class="w-full text-left p-2 bg-white/60 hover:bg-cyan-50 rounded-lg border border-slate-100 transition font-bold text-[9px] flex justify-between items-center group mb-1 shadow-sm uppercase tracking-tighter">${f.pergunta} <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition w-3 h-3 text-cyan-400"></i></button>`).join('') || "A aguardar info.";
+            if(admList) admList.innerHTML = faqs.map(f => `<div class="flex justify-between items-center bg-white/10 p-1.5 rounded text-[8px] uppercase group"><span>${f.pergunta}</span><button onclick="window.deleteItem('faqs', '${f.id}')" class="text-red-400 font-black opacity-60 hover:opacity-100">X</button></div>`).join('');
             lucide.createIcons();
         }
 
         function updateAdminTreinoList() {
-            const list = document.getElementById('admin-treinos-lista');
-            if(!list) return;
+            const list = document.getElementById('admin-treinos-lista'); if(!list) return;
             list.innerHTML = treinos.sort((a,b) => a.id.localeCompare(b.id)).map(t => `
                 <div class="flex justify-between items-center bg-white/10 p-2 rounded-lg text-[8px] border border-white/5 hover:bg-white/20 transition mb-1">
-                    <div class="text-left"><span class="font-black text-cyan-400 uppercase block leading-none mb-1">${t.clube}</span><span class="opacity-40 text-[7px] italic">${t.dia} | ${t.hora}</span></div>
-                    <button onclick="window.deleteItem('treinos', '${t.id}')" class="text-red-400 font-bold hover:text-red-600 px-2 py-1">APAGAR</button>
+                    <div class="text-left leading-none"><span class="font-black text-cyan-400 uppercase block leading-none mb-1">${t.clube}</span><span class="opacity-40 text-[7px] italic">${t.dia} | ${t.hora}</span></div>
+                    <div class="flex gap-1">
+                        <button onclick="window.editReservationName('${t.id}')" class="text-blue-400 font-bold bg-white/5 px-2 py-1 rounded">EDITAR</button>
+                        <button onclick="window.deleteItem('treinos', '${t.id}')" class="text-red-400 font-bold px-2 py-1">APAGAR</button>
+                    </div>
                 </div>
-            `).join('') || '<p class="text-[8px] opacity-20 italic">Grelha vazia.</p>';
+            `).join('') || '<p class="text-[8px] opacity-20 italic">Sem reservas.</p>';
         }
 
-        window.deleteItem = async (col, id) => { if(confirm("Eliminar este registo permanentemente?")) await deleteDoc(doc(db, col, id)); };
+        function updateAdminCozinhaList() {
+            const list = document.getElementById('admin-refeicoes-lista'); if(!list) return;
+            list.innerHTML = refeicoes.map(r => `<div class="flex justify-between items-center bg-white/10 p-1.5 rounded text-[8px] border border-white/5 mb-1"><span>${r.clube} (${r.dia})</span><button onclick="window.deleteItem('refeicoes', '${r.id}')" class="text-red-400">X</button></div>`).join('');
+        }
+
+        window.chatAnswer = (id) => {
+            const faq = faqs.find(f => f.id === id);
+            const respEl = document.getElementById('chat-response');
+            if(faq && respEl) {
+                respEl.innerHTML = `<div class="text-left animate-in fade-in slide-in-from-bottom-1"><p class="font-black text-blue-900 uppercase text-[8px] mb-1 border-b border-blue-50 pb-0.5 tracking-tighter italic">Assistente Organizador:</p><p class="text-[10px] font-bold text-slate-700 italic leading-snug">${faq.resposta}</p></div>`;
+                respEl.classList.remove('flex', 'items-center', 'justify-center', 'text-center');
+            }
+        };
+
+        window.deleteItem = async (col, id) => { if(confirm("Eliminar permanentemente?")) await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', col, id)); };
 
         window.showTab = (tabId) => {
             if (tabId === 'admin' && !adminLoggedIn) return;
@@ -479,8 +524,7 @@
         window.logoutAdmin = () => { adminLoggedIn = false; showTab('inicio'); };
 
         function renderCalendar() {
-            const container = document.getElementById('grid-treinos');
-            if(!container) return;
+            const container = document.getElementById('grid-treinos'); if(!container) return;
             container.innerHTML = '';
             const iAbs = new Date(2026, 2, 8); const fAbs = new Date(2026, 2, 29); let a = new Date(iAbs);
             while(a <= fAbs) {
@@ -497,7 +541,7 @@
                         btn.innerHTML = `${h}<span class="text-[6px] opacity-30">Livre</span>`;
                         const r = treinos.find(t => t.dia === s && t.hora === h);
                         if (a.getDate() >= 27) { btn.classList.add('bg-slate-100','opacity-40'); btn.disabled = true; btn.innerHTML = `${h}<br>PROVA`; }
-                        else if (r) { btn.classList.add('bg-pink-50','border-pink-200','text-pink-600'); btn.innerHTML = `${h}<br><span class="truncate w-full block">${r.clube}</span>`; btn.disabled = true; }
+                        else if (r) { btn.classList.add('bg-pink-50','border-pink-200','text-pink-600'); btn.innerHTML = `${h}<br><span class="truncate w-full block uppercase tracking-tighter">${r.clube}</span>`; btn.disabled = true; }
                         else if (parseInt(h)>=17 && parseInt(h)<21 && a.getDate()!==26) { btn.classList.add('bg-amber-50','text-amber-700','opacity-50'); btn.innerHTML = `${h}<br>BLOQ.`; btn.disabled = true; }
                         else { btn.onclick = () => reservarTreino(s, h); }
                         g.appendChild(btn);
@@ -512,7 +556,7 @@
         async function reservarTreino(dia, hora) {
             const c = prompt("Nome do Clube para reserva:"); if(!c) return;
             const id = `${dia}-${hora}`.replace(/\W/g, '-');
-            await setDoc(doc(db, "treinos", id), { dia, hora, clube: c, timestamp: Date.now() });
+            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', "treinos", id), { dia, hora, clube: c, timestamp: Date.now() });
         }
 
         function populateAdminSelectors() {
@@ -536,10 +580,9 @@
 
         window.updateFormLabels = () => {
             const d = document.getElementById('select-dia-refeicao').value; const t = document.getElementById('select-tipo-refeicao').value;
-            const m = menus[`${d}-${t}`];
-            const la = document.getElementById('label-prato-a'); const lb = document.getElementById('label-prato-b');
-            if(la) la.innerText = m?.pratoA ? `Qtd: ${m.pratoA}` : "Qtd. Prato A";
-            if(lb) lb.innerText = m?.pratoB ? `Qtd: ${m.pratoB}` : "Qtd. Prato B";
+            const m = menus[`${d}-Menu`];
+            const la = document.getElementById('label-prato-a');
+            if(la) la.innerText = m?.pratoA ? `Qtd: ${m.pratoA}` : "Qtd. Pedida";
         };
 
         window.exportarExcel = (tipo) => {
@@ -550,8 +593,8 @@
         function renderPublicMenus() {
             const cont = document.getElementById('public-menu-container'); if(!cont) return;
             cont.innerHTML = ["Sexta", "Sábado", "Domingo"].map((d, i) => {
-                const l = menus[`${d}-Almoço`]; const n = menus[`${d}-Jantar`];
-                return `<div class="glass-card p-4 rounded-xl shadow border-t-2 ${['border-cyan-400','border-pink-500','border-blue-900'][i]}"><h4 class="font-black uppercase text-blue-900 border-b pb-1 text-[10px] mb-2">${d}</h4><div class="space-y-2 text-left text-[9px]"><div class="p-2 bg-white/30 rounded-lg"><span class="font-black text-pink-600 block mb-0.5 uppercase tracking-tighter">Almoço</span><p class="font-bold leading-tight uppercase">${l?.pratoA || 'A definir'}</p></div><div class="p-2 bg-white/30 rounded-lg"><span class="font-black text-cyan-600 block mb-0.5 uppercase tracking-tighter">Jantar</span><p class="font-bold leading-tight uppercase">${n?.pratoA || 'A definir'}</p></div></div></div>`;
+                const m = menus[`${d}-Menu`];
+                return `<div class="glass-card p-4 rounded-xl shadow border-t-2 ${['border-cyan-400','border-pink-500','border-blue-900'][i]}"><h4 class="font-black uppercase text-blue-900 border-b pb-1 text-[10px] mb-2 leading-none uppercase italic">${d}</h4><div class="space-y-2 text-left text-[9px]"><div class="p-3 bg-white/30 rounded-lg text-center"><span class="font-black text-pink-600 block mb-0.5 uppercase tracking-tighter">Ementa do Dia</span><p class="font-bold leading-tight uppercase text-slate-700">${m?.pratoA || 'A definir'}</p></div></div></div>`;
             }).join('');
         }
     </script>
