@@ -40,7 +40,7 @@
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
@@ -53,7 +53,8 @@
             font-weight: 900;
         }
 
-        select { background-color: #0f172a !important; color: white !important; }
+        select, input, textarea { background-color: #0f172a !important; color: white !important; border-radius: 0.75rem; padding: 0.75rem; outline: none; }
+        input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.4); }
     </style>
 </head>
 <body class="text-slate-900 bg-transparent">
@@ -63,22 +64,27 @@
 
     <!-- Navegação -->
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b-4 border-pink-500 shadow-xl">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="cursor-pointer transition-transform hover:scale-105 text-center md:text-left" onclick="showTab('inicio')">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col lg:flex-row justify-between items-center gap-4">
+            <div class="cursor-pointer transition-transform hover:scale-105 text-center lg:text-left" onclick="showTab('inicio')">
                 <span class="text-[9px] font-black text-blue-900 tracking-widest uppercase block leading-tight">Campeonato Nacional</span>
                 <span class="text-3xl font-black text-pink-600 italic uppercase leading-none">Show e Precisão</span>
                 <span class="text-2xl font-black text-cyan-500 uppercase block leading-none">Fafe 2026</span>
             </div>
             <div class="flex flex-wrap justify-center gap-1">
-                <button id="btn-inicio" onclick="showTab('inicio')" class="nav-link px-4 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white/50 transition">Início</button>
-                <button id="btn-treinos" onclick="showTab('treinos')" class="nav-link px-4 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white/50 transition">Treinos</button>
-                <button id="btn-ementas" onclick="showTab('ementas')" class="nav-link px-4 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white/50 transition">Ementas</button>
-                <button id="btn-balnearios" onclick="showTab('balnearios')" class="nav-link px-4 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white/50 transition">Logística</button>
-                <!-- Link de Resultados Dinâmico -->
-                <a id="link-resultados" href="#" target="_blank" class="hidden px-4 py-2 rounded-full font-black text-[10px] uppercase bg-cyan-500 text-white hover:bg-cyan-600 transition flex items-center gap-1 animate-pulse">
-                    <i data-lucide="external-link" class="w-3 h-3"></i> Resultados
+                <button id="btn-inicio" onclick="showTab('inicio')" class="nav-link px-3 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white/50 transition">Início</button>
+                <button id="btn-treinos" onclick="showTab('treinos')" class="nav-link px-3 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white/50 transition">Treinos</button>
+                <button id="btn-ementas" onclick="showTab('ementas')" class="nav-link px-3 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white/50 transition">Ementas</button>
+                <button id="btn-balnearios" onclick="showTab('balnearios')" class="nav-link px-3 py-2 rounded-full font-black text-[10px] uppercase hover:bg-white/50 transition">Logística</button>
+                
+                <!-- Links Geridos pelo Admin -->
+                <a id="link-programa" href="#" target="_blank" class="hidden px-3 py-2 rounded-full font-black text-[10px] uppercase bg-blue-600 text-white hover:bg-blue-700 transition flex items-center gap-1">
+                    <i data-lucide="calendar-range" class="w-3 h-3"></i> Programa
                 </a>
-                <button id="btn-admin" onclick="checkAdmin()" class="nav-link px-4 py-2 rounded-full font-black text-[10px] uppercase bg-slate-900 text-white hover:bg-slate-700 transition ml-2 flex items-center gap-1">
+                <a id="link-resultados" href="#" target="_blank" class="hidden px-3 py-2 rounded-full font-black text-[10px] uppercase bg-cyan-500 text-white hover:bg-cyan-600 transition flex items-center gap-1">
+                    <i data-lucide="award" class="w-3 h-3"></i> Resultados
+                </a>
+
+                <button id="btn-admin" onclick="checkAdmin()" class="nav-link px-3 py-2 rounded-full font-black text-[10px] uppercase bg-slate-900 text-white hover:bg-slate-700 transition ml-2 flex items-center gap-1">
                     <i data-lucide="lock" class="w-3 h-3"></i> Admin
                 </button>
             </div>
@@ -90,200 +96,233 @@
         <!-- SECÇÃO INÍCIO -->
         <section id="tab-inicio" class="tab-content space-y-16">
             
-            <div class="text-center py-10 md:py-32">
-                <!-- Título Limpo (sem federação) -->
-                <h1 class="text-6xl md:text-[10rem] font-black text-blue-950 uppercase italic leading-none tracking-tighter drop-shadow-2xl">Fafe 2026</h1>
-                <p class="text-pink-600 font-black text-xl md:text-2xl uppercase tracking-[0.2em] mt-4 italic">Sala de Visitas do Minho</p>
+            <div class="text-center py-10 md:py-24">
+                <h1 class="text-7xl md:text-[11rem] font-black text-blue-950 uppercase italic leading-none tracking-tighter drop-shadow-2xl">Fafe 2026</h1>
+                <p class="text-pink-600 font-black text-xl md:text-3xl uppercase tracking-[0.2em] mt-4 italic text-shadow">Sala de Visitas do Minho</p>
             </div>
 
-            <!-- Fale Connosco / Chatbot Section -->
-            <div class="glass-card p-10 rounded-[4rem] border-2 border-cyan-400/30 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-8 opacity-5">
-                    <i data-lucide="message-square" size="120"></i>
-                </div>
-                <div class="relative z-10">
-                    <h3 class="text-3xl font-black text-blue-900 uppercase italic mb-8 flex items-center gap-3">
-                        <i data-lucide="bot" class="text-cyan-500"></i> Fale Connosco
-                    </h3>
-                    <div class="grid md:grid-cols-2 gap-10">
-                        <div class="space-y-4">
-                            <p class="text-slate-600 font-bold italic">Selecione uma questão frequente para ajuda imediata:</p>
-                            <div class="space-y-2" id="chatbot-options">
-                                <button onclick="chatAnswer('horarios')" class="w-full text-left p-4 bg-white/60 hover:bg-cyan-50 rounded-2xl border border-slate-200 transition font-bold text-sm flex justify-between items-center group">
-                                    Como funcionam os horários de treino? <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition"></i>
-                                </button>
-                                <button onclick="chatAnswer('refeicoes')" class="w-full text-left p-4 bg-white/60 hover:bg-cyan-50 rounded-2xl border border-slate-200 transition font-bold text-sm flex justify-between items-center group">
-                                    Até quando posso reservar refeições? <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition"></i>
-                                </button>
-                                <button onclick="chatAnswer('localizacao')" class="w-full text-left p-4 bg-white/60 hover:bg-cyan-50 rounded-2xl border border-slate-200 transition font-bold text-sm flex justify-between items-center group">
-                                    Onde fica exatamente o pavilhão? <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div id="chat-response" class="bg-blue-900/5 p-8 rounded-[2.5rem] border-2 border-dashed border-blue-900/10 min-h-[200px] flex items-center justify-center text-center">
-                            <p class="text-slate-400 italic font-medium">Clique numa pergunta ao lado para obter uma resposta...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mensagens -->
+            <!-- Mensagens Oficiais -->
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="glass-card p-10 rounded-[3rem] border-l-8 border-cyan-400 text-left">
-                    <h3 class="text-xl font-black text-blue-900 uppercase italic mb-6 flex items-center gap-3">
-                        <i data-lucide="message-circle" class="text-cyan-500"></i> Mensagem da Câmara
+                    <h3 class="text-xl font-black text-blue-900 uppercase italic mb-6 flex items-center gap-2">
+                        <i data-lucide="info" class="text-cyan-500"></i> Mensagem da Câmara
                     </h3>
-                    <p class="text-slate-700 text-sm leading-relaxed italic font-medium">
-                        "É com enorme orgulho que Fafe volta a receber este Torneio e Campeonato Nacional. Uma prova organizada pela FPP que traz o melhor da patinagem nacional."
+                    <p class="text-slate-700 text-sm leading-relaxed italic">
+                        "É com enorme orgulho que Fafe volta a receber este Torneio e Campeonato Nacional. Uma prova que traz o melhor da patinagem nacional."
                         <br><span class="font-black text-slate-800 not-italic block mt-4">— Antero Barbosa, Presidente CM Fafe</span>
                     </p>
                 </div>
-                <div class="glass-card p-10 rounded-[3rem] shadow-sm border-l-8 border-pink-500 text-left">
-                    <h3 class="text-xl font-black text-blue-900 uppercase italic mb-6 flex items-center gap-3">
+                <div class="glass-card p-10 rounded-[3rem] border-l-8 border-pink-500 text-left">
+                    <h3 class="text-xl font-black text-blue-900 uppercase italic mb-6 flex items-center gap-2">
                         <i data-lucide="users" class="text-pink-500"></i> Boas-Vindas GNA
                     </h3>
-                    <p class="text-slate-700 text-sm leading-relaxed italic font-medium">
-                        "Preparamos o Pavilhão Multiusos para acolher todos os atletas e clubes com a máxima cortesia, amabilidade e simpatia."
+                    <p class="text-slate-700 text-sm leading-relaxed italic">
+                        "Preparamos o Pavilhão Multiusos para acolher todos os atletas com a máxima simpatia."
                         <br><span class="font-black text-slate-800 not-italic block mt-4">— Manuel Orlando Freitas Alves, GNA</span>
                     </p>
                 </div>
             </div>
 
-            <!-- Espaços Técnicos (Sem Planta) -->
-            <div class="space-y-12">
-                <div class="text-center">
-                    <h2 class="text-4xl font-black uppercase italic text-blue-900 leading-tight">Espaços do Pavilhão</h2>
-                    <div class="w-24 h-2 bg-pink-500 mx-auto mt-4 rounded-full"></div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8 text-center">
-                    <div class="glass-card p-6 rounded-[3rem] overflow-hidden">
-                        <h4 class="font-black uppercase italic mb-4 text-blue-900 text-sm">Bancada Central / Juízes</h4>
-                        <img src="bancadacentral.png" class="w-full h-auto rounded-[2rem]" alt="Bancada Central">
+            <!-- Localização e Endereço (Restaurado Mapa) -->
+            <div class="glass-card p-10 rounded-[4rem] flex flex-col md:flex-row gap-10 items-center border border-white/40 shadow-2xl">
+                <div class="flex-1 space-y-6 text-left">
+                    <div class="space-y-2">
+                        <h3 class="text-3xl font-black text-blue-900 uppercase italic leading-none">Onde Estamos</h3>
+                        <p class="text-pink-600 font-black uppercase text-xs tracking-widest">Pavilhão Multiusos de Fafe</p>
                     </div>
-                    <div class="glass-card p-6 rounded-[3rem] overflow-hidden">
-                        <h4 class="font-black uppercase italic mb-4 text-blue-900 text-sm">Bancada de Atletas</h4>
-                        <img src="atletas.png" class="w-full h-auto rounded-[2rem]" alt="Bancada Atletas">
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 bg-white/40 p-5 rounded-3xl border border-white/20">
+                            <i data-lucide="map-pin" class="text-blue-900 mt-1"></i>
+                            <div class="font-bold text-slate-800">
+                                <p class="text-sm">Travessa Parque da Cidade</p>
+                                <p class="text-sm">4820-139 Fafe</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://maps.app.goo.gl/JCkSoKMQnRC69C1q6" target="_blank" class="inline-block bg-blue-900 text-white font-black px-10 py-4 rounded-full uppercase italic text-xs tracking-widest hover:bg-pink-600 transition shadow-xl">
+                        <i data-lucide="external-link" class="inline-block w-4 h-4 mr-1"></i> Abrir no Google Maps
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2 rounded-[3rem] overflow-hidden border-4 border-white shadow-xl">
+                    <img src="morada.png" class="w-full h-auto" alt="Mapa Fafe">
+                </div>
+            </div>
+
+            <!-- Espaços Técnicos -->
+            <div class="grid md:grid-cols-2 gap-8 text-center">
+                <div class="glass-card p-6 rounded-[3rem] overflow-hidden">
+                    <h4 class="font-black uppercase italic mb-4 text-blue-900 text-sm">Bancada Central / Juízes</h4>
+                    <img src="bancadacentral.png" class="w-full h-auto rounded-[2rem]" alt="Bancada Central">
+                </div>
+                <div class="glass-card p-6 rounded-[3rem] overflow-hidden">
+                    <h4 class="font-black uppercase italic mb-4 text-blue-900 text-sm">Bancada de Atletas</h4>
+                    <img src="atletas.png" class="w-full h-auto rounded-[2rem]" alt="Bancada Atletas">
+                </div>
+            </div>
+
+            <!-- Fale Connosco (Destaque Reduzido no fim) -->
+            <div class="glass-card p-8 md:p-12 rounded-[4rem] border border-cyan-200/50 shadow-xl overflow-hidden mt-20">
+                <h3 class="text-2xl font-black text-blue-900 uppercase italic mb-8 flex items-center gap-3">
+                    <i data-lucide="message-square" class="text-cyan-500"></i> Fale Connosco / Perguntas
+                </h3>
+                <div class="grid lg:grid-cols-2 gap-10">
+                    <div class="space-y-3" id="faq-list-public">
+                        <!-- Preenchido dinamicamente -->
+                        <p class="text-xs opacity-50 italic">A carregar perguntas de apoio...</p>
+                    </div>
+                    <div id="chat-response" class="bg-blue-900/5 p-8 rounded-[3rem] border border-blue-900/10 min-h-[150px] flex items-center justify-center text-center">
+                        <p class="text-slate-400 italic text-sm font-medium">Selecione uma pergunta para resposta rápida.</p>
                     </div>
                 </div>
             </div>
+
         </section>
 
         <!-- SECÇÃO TREINOS -->
         <section id="tab-treinos" class="tab-content hidden space-y-12">
             <div class="text-center glass-card p-10 rounded-[3rem] border border-white">
-                <h2 class="text-4xl font-black uppercase italic text-blue-900 leading-tight">Marcação de Treinos</h2>
-                <p id="info-intervalo" class="text-pink-600 font-bold uppercase text-xs tracking-widest mt-2 italic">Calendário Dinâmico</p>
+                <h2 class="text-4xl font-black uppercase italic text-blue-900 leading-tight">Agenda de Treinos</h2>
+                <p id="info-intervalo" class="text-pink-600 font-bold uppercase text-xs tracking-widest mt-2 italic">As datas marcadas antes de dia 23 aparecem automaticamente.</p>
             </div>
             <div id="grid-treinos" class="space-y-10"></div>
         </section>
 
         <!-- SECÇÃO EMENTAS -->
         <section id="tab-ementas" class="tab-content hidden space-y-12 text-center">
-            <div class="glass-card p-10 rounded-[3rem] mb-10 border border-white shadow-sm">
-                <h2 class="text-4xl font-black uppercase italic text-blue-900 tracking-tighter">Ementas e Refeições</h2>
+            <div class="glass-card p-10 rounded-[3rem] mb-10 border border-white">
+                <h2 class="text-4xl font-black uppercase italic text-blue-900 tracking-tighter">Menu e Refeições</h2>
             </div>
             <div class="grid md:grid-cols-3 gap-8" id="public-menu-container"></div>
             
             <div class="bg-slate-950 text-white p-12 md:p-16 rounded-[5rem] shadow-2xl max-w-4xl mx-auto border-4 border-slate-800 mt-12 text-left">
-                <h3 class="text-3xl font-black mb-10 uppercase italic text-cyan-400 text-center tracking-tighter">Registo de Pedido</h3>
+                <h3 class="text-3xl font-black mb-10 uppercase italic text-cyan-400 text-center">Pedido de Refeição</h3>
                 <form id="form-refeicao" class="space-y-8">
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div class="col-span-1 md:col-span-2">
-                            <label class="text-[10px] font-black uppercase opacity-50 block mb-3">Clube / Equipa</label>
-                            <input type="text" name="clube" class="w-full bg-white/5 p-5 rounded-3xl border border-white/10 outline-none focus:border-pink-500 uppercase font-black text-white" required>
+                    <input type="text" name="clube" placeholder="CLUBE / EQUIPA" class="w-full p-4 font-black uppercase" required>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <select id="select-dia-refeicao" name="diaRefeicao" onchange="updateFormLabels()" class="w-full"></select>
+                        <select id="select-tipo-refeicao" name="tipoRefeicao" onchange="updateFormLabels()" class="w-full">
+                            <option value="Almoço">Almoço</option><option value="Jantar">Jantar</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/10">
+                        <div>
+                            <label id="label-prato-a" class="text-[10px] font-black uppercase text-pink-400 block mb-3">Qtd. Prato A</label>
+                            <input type="number" name="qtdPratoA" value="0" min="0" class="w-full text-center text-xl font-black">
                         </div>
                         <div>
-                            <label class="text-[10px] font-black uppercase opacity-50 block mb-3 text-white/50">Dia</label>
-                            <select id="select-dia-refeicao" name="diaRefeicao" onchange="updateFormLabels()" class="w-full bg-slate-900 p-5 rounded-3xl border border-white/20 font-black text-white outline-none">
-                                <option value="Sexta">Sexta (27)</option>
-                                <option value="Sábado">Sábado (28)</option>
-                                <option value="Domingo">Domingo (29)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-black uppercase opacity-50 block mb-3 text-white/50">Refeição</label>
-                            <select id="select-tipo-refeicao" name="tipoRefeicao" onchange="updateFormLabels()" class="w-full bg-slate-900 p-5 rounded-3xl border border-white/20 font-black text-white outline-none">
-                                <option value="Almoço">Almoço</option>
-                                <option value="Jantar">Jantar</option>
-                            </select>
+                            <label id="label-prato-b" class="text-[10px] font-black uppercase text-cyan-400 block mb-3">Qtd. Prato B</label>
+                            <input type="number" name="qtdPratoB" value="0" min="0" class="w-full text-center text-xl font-black">
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/10">
-                        <div>
-                            <label id="label-prato-a" class="text-[10px] font-black uppercase text-pink-400 block mb-3 text-left">Qtd. Prato A</label>
-                            <input type="number" name="qtdPratoA" value="0" min="0" class="w-full bg-white/5 p-5 rounded-3xl border border-white/10 font-black text-center text-xl text-white shadow-inner">
-                        </div>
-                        <div>
-                            <label id="label-prato-b" class="text-[10px] font-black uppercase text-cyan-400 block mb-3 text-left">Qtd. Prato B</label>
-                            <input type="number" name="qtdPratoB" value="0" min="0" class="w-full bg-white/5 p-5 rounded-3xl border border-white/10 font-black text-center text-xl text-white shadow-inner">
-                        </div>
-                    </div>
-                    <button type="submit" class="w-full bg-pink-600 py-6 rounded-[2.5rem] font-black uppercase tracking-widest shadow-xl active:scale-95 transition-all hover:bg-pink-700">Confirmar Reserva</button>
+                    <button type="submit" class="w-full bg-pink-600 py-6 rounded-[2rem] font-black uppercase tracking-widest shadow-xl transition-all hover:bg-pink-700">Confirmar Reserva</button>
                 </form>
+            </div>
+        </section>
+
+        <!-- SECÇÃO LOGÍSTICA -->
+        <section id="tab-balnearios" class="tab-content hidden space-y-12 text-center">
+            <div class="glass-card rounded-[4rem] shadow-2xl overflow-hidden border-4 border-white backdrop-blur max-w-5xl mx-auto text-left">
+                <div class="p-10 border-b border-slate-100 bg-white/50">
+                    <h3 class="font-black text-blue-900 uppercase italic text-xl">Cronograma de Balneários</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse bg-white/30">
+                        <thead>
+                            <tr class="text-[10px] font-black uppercase text-slate-400 border-b-2 bg-white/50">
+                                <th class="p-6">Clube</th><th class="p-6">Sala</th><th class="p-6 text-cyan-600">Entrada</th><th class="p-6 text-pink-600">Saída</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-balnearios" class="divide-y divide-white/50 font-bold italic text-sm"></tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
         <!-- SECÇÃO ADMIN -->
         <section id="tab-admin" class="tab-content hidden space-y-12">
-            <div class="flex flex-col md:flex-row justify-between items-center glass-card p-10 rounded-[3.5rem] border border-white shadow-sm">
-                <h2 class="text-3xl font-black uppercase italic text-blue-900 leading-none">Gestão Central</h2>
+            <div class="flex flex-col lg:flex-row justify-between items-center glass-card p-10 rounded-[3.5rem] border border-white gap-4">
+                <h2 class="text-3xl font-black uppercase italic text-blue-900 leading-none">Painel Administrativo</h2>
                 <div class="flex flex-wrap gap-2">
-                    <button onclick="exportarExcel('refeicoes')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase shadow-lg flex items-center gap-2"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Excel Comida</button>
-                    <button onclick="exportarExcel('treinos')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase shadow-lg flex items-center gap-2"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Excel Pista</button>
+                    <button onclick="exportarExcel('refeicoes')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase flex items-center gap-2"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Comida</button>
+                    <button onclick="exportarExcel('treinos')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase flex items-center gap-2"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Pista</button>
                     <button onclick="logoutAdmin()" class="bg-slate-200 text-slate-700 px-6 py-3 rounded-2xl text-[10px] font-black uppercase">Sair</button>
                 </div>
             </div>
 
-            <!-- Configurações Globais -->
-            <div class="bg-blue-900 text-white p-10 rounded-[4rem] shadow-xl">
-                <h3 class="font-black uppercase mb-6 text-cyan-400 italic text-xl border-b border-white/10 pb-4">Visibilidade de Resultados</h3>
-                <div class="grid md:grid-cols-2 gap-8 items-end">
-                    <div>
-                        <label class="text-[10px] font-black uppercase block mb-3 opacity-50">Link para Resultados e Programa</label>
-                        <input id="admin-results-url" type="text" placeholder="https://..." class="w-full bg-white/10 p-5 rounded-3xl border border-white/10 text-white outline-none">
+            <!-- CONFIGURAÇÃO DE LINKS -->
+            <div class="bg-slate-900 text-white p-10 rounded-[4rem] shadow-xl space-y-8">
+                <h3 class="font-black uppercase text-cyan-400 italic text-xl border-b border-white/10 pb-4 text-left">Ativação de Links (Programa / Resultados)</h3>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="space-y-4 text-left">
+                        <label class="text-[10px] font-black uppercase opacity-50 block">Link do Programa</label>
+                        <input id="admin-url-programa" type="text" placeholder="https://..." class="w-full">
+                        <div class="flex gap-2">
+                            <button onclick="updateLink('programa', true)" class="flex-1 bg-blue-600 py-3 rounded-xl font-black uppercase text-[10px]">Ativar Link</button>
+                            <button onclick="updateLink('programa', false)" class="flex-1 bg-slate-700 py-3 rounded-xl font-black uppercase text-[10px]">Esconder</button>
+                        </div>
                     </div>
-                    <div class="flex gap-4">
-                        <button onclick="toggleResultsVisibility(true)" class="flex-1 bg-green-600 py-5 rounded-3xl font-black uppercase text-[10px]">Mostrar Link Público</button>
-                        <button onclick="toggleResultsVisibility(false)" class="flex-1 bg-red-600 py-5 rounded-3xl font-black uppercase text-[10px]">Esconder Link Público</button>
+                    <div class="space-y-4 text-left">
+                        <label class="text-[10px] font-black uppercase opacity-50 block">Link dos Resultados</label>
+                        <input id="admin-url-resultados" type="text" placeholder="https://..." class="w-full">
+                        <div class="flex gap-2">
+                            <button onclick="updateLink('resultados', true)" class="flex-1 bg-cyan-600 py-3 rounded-xl font-black uppercase text-[10px]">Ativar Link</button>
+                            <button onclick="updateLink('resultados', false)" class="flex-1 bg-slate-700 py-3 rounded-xl font-black uppercase text-[10px]">Esconder</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 text-white">
-                <div class="bg-slate-900/95 p-10 rounded-[4rem] shadow-xl border-4 border-slate-800 backdrop-blur">
-                    <h3 class="font-black uppercase mb-6 text-cyan-400 italic text-xl border-b border-white/10 pb-4">Ementas</h3>
-                    <form id="admin-form-menu" class="space-y-4">
-                        <select name="diaMenu" class="w-full p-4 rounded-2xl border border-white/10 font-bold uppercase text-xs text-white"></select>
-                        <select name="tipoMenu" class="w-full p-4 rounded-2xl border border-white/10 font-bold uppercase text-xs text-white">
+            <!-- GESTÃO DE FAQS -->
+            <div class="bg-blue-950 text-white p-10 rounded-[4rem] shadow-xl text-left">
+                <h3 class="font-black uppercase text-cyan-400 italic text-xl border-b border-white/10 pb-4">Gestão do Chatbot (Fale Connosco)</h3>
+                <form id="admin-form-faq" class="grid md:grid-cols-2 gap-8 mt-6">
+                    <div class="space-y-4">
+                        <input name="faqPerg" placeholder="Pergunta (ex: Onde levantar as credenciais?)" class="w-full" required>
+                        <textarea name="faqResp" placeholder="Resposta oficial para o clube..." class="w-full h-32" required></textarea>
+                        <button type="submit" class="w-full bg-cyan-600 py-4 rounded-xl font-black uppercase text-[10px]">Adicionar Pergunta</button>
+                    </div>
+                    <div class="bg-white/5 p-6 rounded-3xl overflow-y-auto max-h-[250px] space-y-3" id="admin-faq-list">
+                        <!-- Lista de FAQs -->
+                    </div>
+                </form>
+            </div>
+
+            <!-- RESTANTE GESTÃO -->
+            <div class="grid md:grid-cols-3 gap-8 text-white">
+                <div class="bg-slate-900 p-8 rounded-[4rem] shadow-xl text-left">
+                    <h3 class="font-black uppercase text-cyan-400 italic text-sm mb-4">Ementas</h3>
+                    <form id="admin-form-menu" class="space-y-3">
+                        <select name="diaMenu" class="w-full text-xs"></select>
+                        <select name="tipoMenu" class="w-full text-xs">
                             <option value="Almoço">Almoço</option><option value="Jantar">Jantar</option>
                         </select>
-                        <input type="text" name="pratoAMenu" placeholder="Nome Prato A" class="w-full bg-slate-800 p-4 rounded-2xl border border-white/10 text-white" required>
-                        <input type="text" name="pratoBMenu" placeholder="Nome Prato B" class="w-full bg-slate-800 p-4 rounded-2xl border border-white/10 text-white" required>
-                        <button type="submit" class="w-full bg-cyan-600 py-4 rounded-2xl font-black uppercase text-[10px]">Gravar</button>
+                        <input name="pratoAMenu" placeholder="Prato A" class="w-full text-xs" required>
+                        <input name="pratoBMenu" placeholder="Prato B" class="w-full text-xs" required>
+                        <button type="submit" class="w-full bg-cyan-600 py-3 rounded-xl font-black uppercase text-[10px]">Gravar</button>
                     </form>
                 </div>
-                <div class="bg-blue-950/95 p-10 rounded-[4rem] shadow-xl border-4 border-blue-900 backdrop-blur">
-                    <h3 class="font-black uppercase mb-6 text-cyan-400 italic text-xl border-b border-white/10 pb-4">Bloqueios Pista</h3>
-                    <form id="admin-form-treino" class="space-y-4">
-                        <select id="admin-select-dia-bloqueio" name="dataManual" class="w-full p-4 rounded-2xl border border-white/10 font-bold uppercase text-xs text-white"></select>
-                        <div class="grid grid-cols-2 gap-4">
-                            <select id="admin-select-hora-inicio" name="horaInicio" class="w-full p-4 rounded-2xl border border-white/10 font-bold text-xs text-white"></select>
-                            <select id="admin-select-hora-fim" name="horaFim" class="w-full p-4 rounded-2xl border border-white/10 font-bold text-xs text-white"></select>
+                <div class="bg-slate-900 p-8 rounded-[4rem] shadow-xl text-left">
+                    <h3 class="font-black uppercase text-cyan-400 italic text-sm mb-4">Pista</h3>
+                    <form id="admin-form-treino" class="space-y-3">
+                        <select id="admin-select-dia-bloqueio" name="dataManual" class="w-full text-xs"></select>
+                        <div class="grid grid-cols-2 gap-2">
+                            <select id="admin-select-hora-inicio" name="horaInicio" class="w-full text-xs"></select>
+                            <select id="admin-select-hora-fim" name="horaFim" class="w-full text-xs"></select>
                         </div>
-                        <input type="text" name="clubeManual" placeholder="Equipa / Motivo" class="w-full bg-blue-900 p-4 rounded-2xl border border-white/10 text-white" required>
-                        <button type="submit" class="w-full bg-blue-600 py-4 rounded-2xl font-black uppercase text-[10px]">Bloquear Pista</button>
+                        <input name="clubeManual" placeholder="Equipa" class="w-full text-xs" required>
+                        <button type="submit" class="w-full bg-blue-600 py-3 rounded-xl font-black uppercase text-[10px]">Bloquear</button>
                     </form>
                 </div>
-                <div class="bg-pink-900/95 p-10 rounded-[4rem] shadow-xl border-4 border-pink-800 backdrop-blur">
-                    <h3 class="font-black uppercase mb-6 text-pink-200 italic text-xl border-b border-white/10 pb-4 text-left">Balneários</h3>
-                    <form id="admin-form-balneario" class="space-y-4 text-left">
-                        <input type="text" name="clubeBal" placeholder="Clube" class="w-full bg-pink-900 p-4 rounded-2xl border border-white/10 text-white" required>
-                        <input type="text" name="salaBal" placeholder="Sala" class="w-full bg-pink-900 p-4 rounded-2xl border border-white/10 text-white" required>
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="text" name="entradaBal" placeholder="Entrada" class="bg-pink-900 p-4 rounded-2xl border border-white/10 text-white" required>
-                            <input type="text" name="saidaBal" placeholder="Saída" class="bg-pink-900 p-4 rounded-2xl border border-white/10 text-white" required>
+                <div class="bg-slate-900 p-8 rounded-[4rem] shadow-xl text-left">
+                    <h3 class="font-black uppercase text-cyan-400 italic text-sm mb-4">Balneários</h3>
+                    <form id="admin-form-balneario" class="space-y-3">
+                        <input name="clubeBal" placeholder="Clube" class="w-full text-xs" required>
+                        <input name="salaBal" placeholder="Sala" class="w-full text-xs" required>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input name="entradaBal" placeholder="Entrada" class="bg-slate-800 p-2 rounded-xl text-xs" required>
+                            <input name="saidaBal" placeholder="Saída" class="bg-slate-800 p-2 rounded-xl text-xs" required>
                         </div>
-                        <button type="submit" class="w-full bg-pink-600 py-4 rounded-2xl font-black uppercase text-[10px]">Publicar</button>
+                        <button type="submit" class="w-full bg-pink-600 py-3 rounded-xl font-black uppercase text-[10px]">Publicar</button>
                     </form>
                 </div>
             </div>
@@ -291,23 +330,23 @@
 
     </main>
 
-    <!-- Rodapé Colorido e Legível -->
-    <footer class="bg-blue-950 text-white py-16 px-4 text-center mt-32 relative overflow-hidden border-t-8 border-pink-600">
+    <!-- Rodapé Elegante e Visível -->
+    <footer class="bg-slate-950 text-white py-16 px-4 text-center mt-32 border-t-8 border-pink-600 relative overflow-hidden">
         <div class="max-w-5xl mx-auto mb-12">
-            <img src="footer.png" class="w-full h-auto" alt="Parceiros" onerror="this.src='footer.jpg';">
+            <img src="footer.png" class="w-full h-auto" alt="Parceiros" onerror="this.onerror=null; this.src='footer.jpg';">
         </div>
-        <div class="max-w-7xl mx-auto space-y-8">
-            <div class="flex flex-col items-center gap-2">
-                <p class="text-[11px] font-black uppercase tracking-[0.5em] opacity-50">© 2026 Campeonato Nacional Show e Precisão</p>
-                <p class="font-bold text-sm italic tracking-tight">Pavilhão Multiusos de Fafe | Travessa Parque da Cidade | 4820-139 Fafe</p>
-            </div>
-            <!-- Email com Cor de Destaque -->
-            <div class="inline-block bg-white/5 px-8 py-4 rounded-full border border-white/10">
-                <span class="text-[10px] font-black uppercase opacity-40 block mb-1">Contacto Oficial</span>
-                <a href="mailto:depcom.patinagem.gna@gmail.com" class="text-cyan-400 font-black text-lg md:text-xl hover:text-pink-500 transition-colors tracking-tight">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <p class="text-[11px] font-black uppercase tracking-[0.5em] opacity-40">© 2026 Campeonato Nacional Show e Precisão</p>
+            
+            <!-- Email de Alta Visibilidade -->
+            <div class="inline-block bg-white/5 px-12 py-10 rounded-[3.5rem] border-2 border-cyan-400/30 shadow-2xl group transition-all hover:bg-white/10">
+                <span class="text-[11px] font-black uppercase text-cyan-400 block mb-4 tracking-widest">Apoio Técnico e Administrativo (GNA)</span>
+                <a href="mailto:depcom.patinagem.gna@gmail.com" class="text-white font-black text-2xl md:text-4xl hover:text-cyan-400 transition-colors tracking-tighter">
                     depcom.patinagem.gna@gmail.com
                 </a>
             </div>
+            
+            <p class="text-xs font-bold italic opacity-60">Pavilhão Multiusos de Fafe | Travessa Parque da Cidade | 4820-139 Fafe</p>
         </div>
     </footer>
 
@@ -330,71 +369,60 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        let treinos = [];
-        let refeicoes = [];
-        let menus = {};
-        let configGlobal = { showResults: false, resultsUrl: "" };
+        let treinos = []; let faqs = []; let refeicoes = []; let balnearios = []; let menus = {};
         let adminLoggedIn = false;
         const slots = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
 
         window.onload = async () => {
-            lucide.createIcons();
-            showTab('inicio');
-            await signInAnonymously(auth);
-            initListeners();
-            populateAdminSelectors();
+            lucide.createIcons(); showTab('inicio'); await signInAnonymously(auth); initListeners();
         };
 
         function initListeners() {
-            onSnapshot(collection(db, "treinos"), (s) => {
-                treinos = s.docs.map(d => ({id: d.id, ...d.data()}));
-                renderCalendar();
-            });
-            onSnapshot(collection(db, "menus"), (s) => {
-                s.docs.forEach(d => menus[d.id] = d.data());
-                renderPublicMenus();
-                updateFormLabels();
-            });
-            // Ouvinte para configurações de resultados
-            onSnapshot(doc(db, "settings", "global"), (d) => {
-                if(d.exists()) {
-                    configGlobal = d.data();
-                    updateResultsLink();
-                }
+            const appId = 'show-fafe-2026';
+            onSnapshot(collection(db, "treinos"), (s) => { treinos = s.docs.map(d => ({id: d.id, ...d.data()})); renderCalendar(); });
+            onSnapshot(collection(db, "refeicoes"), (s) => { refeicoes = s.docs.map(d => ({id: d.id, ...d.data()})); });
+            onSnapshot(collection(db, "balnearios"), (s) => { balnearios = s.docs.map(d => ({id: d.id, ...d.data()})); renderBalnearios(); });
+            onSnapshot(collection(db, "menus"), (s) => { s.docs.forEach(d => menus[d.id] = d.data()); renderPublicMenus(); updateFormLabels(); });
+            onSnapshot(collection(db, "faqs"), (s) => { faqs = s.docs.map(d => ({id: d.id, ...d.data()})); renderFAQs(); });
+            
+            // Ouvinte de Links
+            onSnapshot(doc(db, "settings", "links"), (d) => {
+                const data = d.exists() ? d.data() : {};
+                const lProg = document.getElementById('link-programa');
+                const lRes = document.getElementById('link-resultados');
+                if(data.programa_vis) { lProg.classList.remove('hidden'); lProg.href = data.programa_url; } else lProg.classList.add('hidden');
+                if(data.resultados_vis) { lRes.classList.remove('hidden'); lRes.href = data.resultados_url; } else lRes.classList.add('hidden');
             });
         }
 
-        function updateResultsLink() {
-            const linkEl = document.getElementById('link-resultados');
-            if(configGlobal.showResults && configGlobal.resultsUrl) {
-                linkEl.classList.remove('hidden');
-                linkEl.href = configGlobal.resultsUrl;
-            } else {
-                linkEl.classList.add('hidden');
-            }
-        }
-
-        window.toggleResultsVisibility = async (visible) => {
-            const url = document.getElementById('admin-results-url').value;
-            await setDoc(doc(db, "settings", "global"), {
-                showResults: visible,
-                resultsUrl: url
-            }, { merge: true });
-            alert(visible ? "Link de resultados ativado!" : "Link de resultados escondido!");
+        window.updateLink = async (tipo, vis) => {
+            const url = document.getElementById(`admin-url-${tipo}`).value;
+            const update = {};
+            update[`${tipo}_url`] = url;
+            update[`${tipo}_vis`] = vis;
+            await setDoc(doc(db, "settings", "links"), update, { merge: true });
+            alert("Estado do link atualizado!");
         };
 
-        window.chatAnswer = (topic) => {
+        window.chatAnswer = (id) => {
+            const faq = faqs.find(f => f.id === id);
             const respEl = document.getElementById('chat-response');
-            let html = "";
-            if(topic === 'horarios') {
-                html = `<div class="text-left"><p class="font-black text-blue-900 mb-2">Treinos:</p><p class="text-sm">Os horários de treino entre as 17h e as 21h estão reservados para manutenção oficial (exceto dia 26). Os clubes podem reservar os slots livres diretamente no separador "Treinos".</p></div>`;
-            } else if(topic === 'refeicoes') {
-                html = `<div class="text-left"><p class="font-black text-blue-900 mb-2">Refeições:</p><p class="text-sm">As reservas devem ser feitas com 48h de antecedência. No separador "Ementas" pode ver o que será servido e registar a quantidade para o seu clube.</p></div>`;
-            } else if(topic === 'localizacao') {
-                html = `<div class="text-left"><p class="font-black text-blue-900 mb-2">Onde estamos:</p><p class="text-sm">Estamos no Pavilhão Multiusos de Fafe, mesmo junto ao Parque da Cidade. Use o botão "Abrir no Google Maps" abaixo para GPS.</p></div>`;
-            }
-            respEl.innerHTML = html;
+            respEl.innerHTML = `<div class="text-left animate-in fade-in slide-in-from-bottom-2"><p class="font-black text-blue-900 uppercase text-[10px] mb-3 border-b pb-1 border-blue-100">Resposta Assistente GNA:</p><p class="text-sm font-bold text-slate-700 italic leading-relaxed">${faq.resposta}</p></div>`;
             respEl.classList.remove('flex', 'items-center', 'justify-center', 'text-center');
+        };
+
+        function renderFAQs() {
+            const pubList = document.getElementById('faq-list-public');
+            const admList = document.getElementById('admin-faq-list');
+            if(pubList) pubList.innerHTML = faqs.map(f => `<button onclick="chatAnswer('${f.id}')" class="w-full text-left p-4 bg-white/60 hover:bg-cyan-50 rounded-2xl border border-slate-200 transition font-bold text-xs flex justify-between items-center group">${f.pergunta} <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition w-4 h-4"></i></button>`).join('') || "Sem perguntas de ajuda de momento.";
+            if(admList) admList.innerHTML = faqs.map(f => `<div class="flex justify-between items-center bg-white/10 p-3 rounded-xl text-[10px] uppercase"><span>${f.pergunta}</span><button onclick="window.deleteItem('faqs', '${f.id}')" class="text-red-400 font-bold">Remover</button></div>`).join('');
+            lucide.createIcons();
+        }
+
+        document.getElementById('admin-form-faq').onsubmit = async (e) => {
+            e.preventDefault(); const fd = new FormData(e.target);
+            await addDoc(collection(db, "faqs"), { pergunta: fd.get('faqPerg'), resposta: fd.get('faqResp'), timestamp: Date.now() });
+            e.target.reset(); alert("Pergunta adicionada!");
         };
 
         window.showTab = (tabId) => {
@@ -419,65 +447,39 @@
             const container = document.getElementById('grid-treinos');
             if(!container) return;
             container.innerHTML = '';
-            const inicioAbs = new Date(2026, 2, 8); 
-            const fimAbs = new Date(2026, 2, 29); 
-            let atual = new Date(inicioAbs);
-            
-            while(atual <= fimAbs) {
-                const diaStr = atual.toLocaleDateString('pt-PT', { weekday: 'long', day: 'numeric', month: 'long' });
-                const temMarcacao = treinos.some(t => t.dia === diaStr);
-                const isPublico = atual.getDate() >= 23;
-
-                if (isPublico || temMarcacao) {
-                    const diaId = diaStr.replace(/\W/g, '-');
-                    const isDay26 = atual.getDate() === 26;
-                    const isComp = atual.getDate() >= 27;
-
-                    const diaDiv = document.createElement('div');
-                    diaDiv.className = "bg-white/70 p-10 rounded-[3.5rem] shadow-xl border border-white backdrop-blur-md";
-                    diaDiv.innerHTML = `<h3 class="font-black text-blue-900 uppercase italic mb-8 border-b-2 pb-4 flex items-center justify-between text-xl">${diaStr} <i data-lucide="calendar" class="w-6 h-6 opacity-10"></i></h3>`;
-                    const gridSlots = document.createElement('div');
-                    gridSlots.className = "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-3";
-                    
-                    slots.forEach(hora => {
+            const iAbs = new Date(2026, 2, 8); const fAbs = new Date(2026, 2, 29); let a = new Date(iAbs);
+            while(a <= fAbs) {
+                const s = a.toLocaleDateString('pt-PT', { weekday: 'long', day: 'numeric', month: 'long' });
+                const tem = treinos.some(t => t.dia.toLowerCase().trim() === s.toLowerCase().trim());
+                if (a.getDate() >= 23 || tem) {
+                    const diaId = s.replace(/\W/g, '-');
+                    const isDay26 = a.getDate() === 26;
+                    const dDiv = document.createElement('div');
+                    dDiv.className = "bg-white/70 p-10 rounded-[3.5rem] shadow-xl border border-white backdrop-blur-md";
+                    dDiv.innerHTML = `<h3 class="font-black text-blue-900 uppercase italic mb-8 border-b-2 pb-4 text-xl">${s}</h3>`;
+                    const g = document.createElement('div'); g.className = "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-3";
+                    slots.forEach(h => {
                         const btn = document.createElement('button');
-                        btn.id = `btn-${diaId}-${hora}`.replace(/\W/g, '-');
                         btn.className = "slot-button p-3 rounded-2xl border-2 text-[10px] font-black uppercase transition-all flex flex-col items-center justify-center gap-1 min-h-[75px] shadow-sm";
-                        btn.innerHTML = `${hora}<span class="status-text text-[8px] font-bold opacity-60">Livre</span>`;
-                        
-                        const hInt = parseInt(hora);
-                        const r = treinos.find(t => t.dia === diaStr && t.hora === hora);
-
-                        if (isComp) {
-                            btn.classList.add('bg-slate-50/50', 'text-slate-400', 'cursor-not-allowed', 'opacity-50');
-                            btn.innerHTML = `${hora}<span class="text-[8px]">PROVA</span>`;
-                            btn.disabled = true;
-                        } else if (r) {
-                            btn.classList.add('bg-pink-100/80', 'border-pink-300', 'text-pink-600', 'shadow-inner');
-                            btn.innerHTML = `${hora}<span class="text-[7px] truncate w-full uppercase">${r.clube}</span>`;
-                            btn.disabled = true;
-                        } else if (hInt >= 17 && hInt < 21 && !isDay26) {
-                            btn.classList.add('bg-amber-50/50', 'text-amber-700', 'cursor-not-allowed', 'opacity-80');
-                            btn.innerHTML = `${hora}<span class="text-[8px]">BLOQ.</span>`;
-                            btn.disabled = true;
-                        } else {
-                            btn.onclick = () => reservarTreino(diaStr, hora);
-                        }
-                        gridSlots.appendChild(btn);
+                        btn.innerHTML = `${h}<span class="text-[8px] opacity-60">Livre</span>`;
+                        const r = treinos.find(t => t.dia === s && t.hora === h);
+                        if (a.getDate() >= 27) { btn.classList.add('opacity-40'); btn.disabled = true; btn.innerHTML = `${h}<br>PROVA`; }
+                        else if (r) { btn.classList.add('bg-pink-100/80','border-pink-300','text-pink-600'); btn.innerHTML = `${h}<br>${r.clube}`; btn.disabled = true; }
+                        else if (parseInt(h)>=17 && parseInt(h)<21 && !isDay26) { btn.classList.add('bg-amber-50/50'); btn.innerHTML = `${h}<br>BLOQ.`; btn.disabled = true; }
+                        else { btn.onclick = () => reservarTreino(s, h); }
+                        g.appendChild(btn);
                     });
-                    diaDiv.appendChild(gridSlots);
-                    container.appendChild(diaDiv);
+                    dDiv.appendChild(g); container.appendChild(dDiv);
                 }
-                atual.setDate(atual.getDate() + 1);
+                a.setDate(a.getDate() + 1);
             }
             lucide.createIcons();
         }
 
         async function reservarTreino(dia, hora) {
-            const clube = prompt("Nome do Clube:");
-            if(!clube) return;
+            const c = prompt("Nome do Clube:"); if(!c) return;
             const id = `${dia}-${hora}`.replace(/\W/g, '-');
-            await setDoc(doc(db, "treinos", id), { dia, hora, clube, timestamp: Date.now() });
+            await setDoc(doc(db, "treinos", id), { dia, hora, clube: c, timestamp: Date.now() });
         }
 
         function populateAdminSelectors() {
@@ -485,30 +487,73 @@
             const hIn = document.getElementById('admin-select-hora-inicio');
             const hFim = document.getElementById('admin-select-hora-fim');
             const dMenu = document.getElementsByName('diaMenu')[0];
+            const dRef = document.getElementById('select-dia-refeicao');
             if(!dBloq) return;
-            dBloq.innerHTML = ''; hIn.innerHTML = ''; hFim.innerHTML = ''; dMenu.innerHTML = '';
+            dBloq.innerHTML = ''; hIn.innerHTML = ''; hFim.innerHTML = ''; dMenu.innerHTML = ''; dRef.innerHTML = '';
             const i = new Date(2026, 2, 8); const f = new Date(2026, 2, 29); let a = new Date(i);
             while(a <= f) {
                 const s = a.toLocaleDateString('pt-PT', { weekday: 'long', day: 'numeric', month: 'long' });
                 dBloq.add(new Option(s, s));
-                if(a.getDate() >= 27) dMenu.add(new Option(s.split(',')[0], s.split(',')[0]));
+                if(a.getDate() >= 27) {
+                    const label = s.split(',')[0];
+                    dMenu.add(new Option(label, label));
+                    dRef.add(new Option(label, label));
+                }
                 a.setDate(a.getDate() + 1);
             }
             slots.forEach(h => { hIn.add(new Option(h, h)); hFim.add(new Option(h, h)); });
         }
 
-        window.exportarExcel = (tipo) => {
-            const d = (tipo === 'refeicoes') ? refeicoes.map(r => ({Clube: r.clube, Dia: r.dia, Refeição: r.refeicao, DosesA: r.qtdA, DosesB: r.qtdB})) : treinos.map(t => ({Dia: t.dia, Hora: t.hora, Clube: t.clube}));
-            const ws = XLSX.utils.json_to_sheet(d); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, tipo); XLSX.writeFile(wb, `${tipo}_showfafe2026.xlsx`);
+        window.updateFormLabels = () => {
+            const d = document.getElementById('select-dia-refeicao').value; const t = document.getElementById('select-tipo-refeicao').value;
+            const m = menus[`${d}-${t}`];
+            document.getElementById('label-prato-a').innerText = m?.pratoA ? `Qtd: ${m.pratoA}` : "Qtd. Prato A";
+            document.getElementById('label-prato-b').innerText = m?.pratoB ? `Qtd: ${m.pratoB}` : "Qtd. Prato B";
         };
 
-        window.deleteItem = async (col, id) => { if(confirm("Remover permanentemente?")) await deleteDoc(doc(db, col, id)); };
+        window.exportarExcel = (tipo) => {
+            const data = (tipo === 'refeicoes') ? refeicoes.map(r => ({Clube: r.clube, Dia: r.dia, Refeição: r.refeicao, DosesA: r.qtdA, DosesB: r.qtdB})) : treinos.map(t => ({Dia: t.dia, Hora: t.hora, Clube: t.clube}));
+            const ws = XLSX.utils.json_to_sheet(data); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, tipo); XLSX.writeFile(wb, `${tipo}_showfafe2026.xlsx`);
+        };
+
+        window.deleteItem = async (col, id) => { if(confirm("Eliminar registo?")) await deleteDoc(doc(db, col, id)); };
+
+        function renderPublicMenus() {
+            const cont = document.getElementById('public-menu-container'); if(!cont) return;
+            cont.innerHTML = ["Sexta", "Sábado", "Domingo"].map((d, i) => {
+                const l = menus[`${d}-Almoço`]; const n = menus[`${d}-Jantar`];
+                return `<div class="glass-card p-10 rounded-[4rem] shadow border-t-8 ${['border-cyan-400','border-pink-500','border-blue-900'][i]}"><h4 class="font-black uppercase italic mb-8 text-blue-900 border-b pb-4">${d}</h4><div class="space-y-6 text-left"><div class="p-5 bg-white/30 rounded-3xl"><span class="text-[8px] font-black text-pink-600 uppercase block mb-1">Almoço</span><p class="text-[11px] font-black uppercase">${l?.pratoA || 'A definir'}</p><p class="text-[11px] font-bold opacity-60 uppercase">${l?.pratoB || 'A definir'}</p></div><div class="p-5 bg-white/30 rounded-3xl"><span class="text-[8px] font-black text-cyan-600 uppercase block mb-1">Jantar</span><p class="text-[11px] font-black uppercase">${n?.pratoA || 'A definir'}</p><p class="text-[11px] font-bold opacity-60 uppercase">${n?.pratoB || 'A definir'}</p></div></div></div>`;
+            }).join('');
+        }
+
+        function renderBalnearios() {
+            const list = document.getElementById('lista-balnearios'); if (!list) return;
+            list.innerHTML = balnearios.sort((a,b)=>a.timestamp-b.timestamp).map(b => `<tr><td class="p-6 uppercase">${b.clube}</td><td class="p-6 font-black">${b.sala}</td><td class="p-6 text-cyan-600 font-black">${b.entrada}</td><td class="p-6 text-pink-600 font-black">${b.saida}</td></tr>`).join('') || '<tr><td colspan="4" class="p-16 text-center opacity-40 italic">Nenhum horário publicado.</td></tr>';
+        }
+
+        document.getElementById('form-refeicao').onsubmit = async (e) => {
+            e.preventDefault(); const fd = new FormData(e.target);
+            await addDoc(collection(db, "refeicoes"), { clube: fd.get('clube'), dia: fd.get('diaRefeicao'), refeicao: fd.get('tipoRefeicao'), qtdA: fd.get('qtdPratoA'), qtdB: fd.get('qtdPratoB'), timestamp: Date.now() });
+            alert("Reserva enviada!"); e.target.reset();
+        };
+
+        document.getElementById('admin-form-menu').onsubmit = async (e) => {
+            e.preventDefault(); const fd = new FormData(e.target); const k = `${fd.get('diaMenu')}-${fd.get('tipoMenu')}`;
+            await setDoc(doc(db, "menus", k), { pratoA: fd.get('pratoAMenu'), pratoB: fd.get('pratoBMenu'), timestamp: Date.now() });
+            alert("Ementa gravada!"); e.target.reset();
+        };
 
         document.getElementById('admin-form-treino').onsubmit = async (e) => {
             e.preventDefault(); const fd = new FormData(e.target); const d = fd.get('dataManual'); const hI = fd.get('horaInicio'); const hF = fd.get('horaFim'); const c = fd.get('clubeManual');
             const idxI = slots.indexOf(hI); const idxF = slots.indexOf(hF);
-            for(let i = idxI; i <= idxF; i++) { const id = `${d}-${slots[i]}`.replace(/\W/g, '-'); await setDoc(doc(db, "treinos", id), { dia: d, hora: slots[i], clube: c, timestamp: Date.now() }); }
-            alert("Bloqueio efetuado!"); e.target.reset();
+            for(let i = idxI; i <= idxF; i++) { await setDoc(doc(db, "treinos", `${d}-${slots[i]}`.replace(/\W/g, '-')), { dia: d, hora: slots[i], clube: c, timestamp: Date.now() }); }
+            alert("Horários bloqueados!"); e.target.reset();
+        };
+
+        document.getElementById('admin-form-balneario').onsubmit = async (e) => {
+            e.preventDefault(); const fd = new FormData(e.target);
+            await addDoc(collection(db, "balnearios"), { clube: fd.get('clubeBal'), sala: fd.get('salaBal'), entrada: fd.get('entradaBal'), saida: fd.get('saidaBal'), timestamp: Date.now() });
+            alert("Balneário publicado!"); e.target.reset();
         };
     </script>
 </body>
